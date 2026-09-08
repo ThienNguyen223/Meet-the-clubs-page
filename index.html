@@ -181,13 +181,17 @@
 <!-- Initial warning -->
 <div id="warning">
     <div class="warning-box">
+
         <h1>⚠ WARNING ⚠</h1>
+
         <p>CRITICAL SECURITY EVENT DETECTED</p>
         <p>Unauthorized access may have occurred.</p>
 
+        <!-- Button remains, but is no longer required -->
         <button onclick="startDemo()">
             INVESTIGATE
         </button>
+
     </div>
 </div>
 
@@ -220,7 +224,9 @@
 
 <!-- Final reveal -->
 <div id="reveal">
+
     <div>
+
         <h1>😈 GOTCHA!</h1>
 
         <p>
@@ -243,21 +249,65 @@
         </p>
 
        <p>
-          <a href="https://csunlayer8.github.io/links" target="_blank">
-                Join Layer 8 Cybersecurity Club.
-          </a>
-        </p>
+            <a href="https://csunlayer8.github.io/links" target="_blank">
+               Join Layer 8 Cybersecurity Club.
+            </a>
+            
+       </p>
 
         <button onclick="location.reload()">
             RUN DEMO AGAIN
         </button>
+
     </div>
+
 </div>
 
 
 <script>
 
+let demoStarted = false;
+
+
+/*
+ * Starts the fake hacking demonstration.
+ * The demo can only be started once.
+ */
+function startDemo() {
+
+    // Prevent the button and automatic startup
+    // from running the animation twice.
+    if (demoStarted) {
+        return;
+    }
+
+    demoStarted = true;
+
+    // Hide warning screen
+    document.getElementById("warning").style.display = "none";
+
+    // Show fake hacked screen
+    document.getElementById("main").style.display = "block";
+
+    // Start visual effects
+    document.body.classList.add("shake");
+
+    // Start fake terminal messages
+    typeMessages();
+
+    // Start fake progress bar
+    startProgress();
+
+    // Start countdown
+    startCountdown();
+}
+
+
+/*
+ * Fake terminal messages
+ */
 const messages = [
+
     "[+] Establishing secure connection...",
     "[+] Connection established.",
     "[!] Unauthorized session detected.",
@@ -273,26 +323,14 @@ const messages = [
     "[!] WARNING: DATA EXFILTRATION IMMINENT",
     "",
     ">>> SYSTEM LOCKDOWN INITIATED <<<"
+
 ];
-
-function startDemo() {
-
-    document.getElementById("warning").style.display = "none";
-    document.getElementById("main").style.display = "block";
-
-    document.body.classList.add("shake");
-
-    typeMessages();
-
-    startProgress();
-
-    startCountdown();
-}
 
 
 function typeMessages() {
 
-    const terminal = document.getElementById("terminalText");
+    const terminal =
+        document.getElementById("terminalText");
 
     let index = 0;
 
@@ -302,7 +340,8 @@ function typeMessages() {
             return;
         }
 
-        terminal.innerHTML += messages[index] + "\n";
+        terminal.innerHTML +=
+            messages[index] + "\n";
 
         index++;
 
@@ -313,9 +352,13 @@ function typeMessages() {
 }
 
 
+/*
+ * Fake encryption progress bar
+ */
 function startProgress() {
 
-    const bar = document.getElementById("progress");
+    const bar =
+        document.getElementById("progress");
 
     let progress = 0;
 
@@ -330,18 +373,27 @@ function startProgress() {
             clearInterval(interval);
         }
 
-        bar.style.width = progress + "%";
+        bar.style.width =
+            progress + "%";
 
     }, 250);
 }
 
 
+/*
+ * Fake countdown
+ */
 function startCountdown() {
 
-    const countdown = document.getElementById("countdown");
+    const countdown =
+        document.getElementById("countdown");
 
     let number = 10;
 
+    /*
+     * Give the terminal animation a few seconds
+     * before starting the countdown.
+     */
     setTimeout(() => {
 
         countdown.innerText = number;
@@ -367,6 +419,9 @@ function startCountdown() {
 }
 
 
+/*
+ * Final awareness reveal
+ */
 function reveal() {
 
     document.body.classList.remove("shake");
@@ -374,8 +429,20 @@ function reveal() {
     document.getElementById("main").style.display = "none";
 
     document.getElementById("reveal").style.display = "flex";
-
 }
+
+
+/*
+ * AUTOMATIC START
+ *
+ * The fake breach begins automatically when
+ * the webpage finishes loading.
+ */
+window.onload = function() {
+
+    startDemo();
+
+};
 
 </script>
 
